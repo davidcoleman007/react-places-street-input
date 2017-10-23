@@ -54,7 +54,7 @@ var ReactPlacesStreetInput = function (_Component) {
 
     _this.state = {
       autocompleteItems: [],
-      inputAutocomplete: true
+      inputAutocomplete: false
     };
 
     _this.autocompleteCallback = _this.autocompleteCallback.bind(_this);
@@ -132,8 +132,11 @@ var ReactPlacesStreetInput = function (_Component) {
   }, {
     key: 'clearAutocomplete',
     value: function clearAutocomplete() {
+      var onClearAutocomplete = this.props.onClearAutocomplete;
+
       console.log('clearing autocomplete');
       this.setState({ autocompleteItems: [] });
+      onClearAutocomplete && onClearAutocomplete();
     }
   }, {
     key: 'selectAddress',
@@ -380,9 +383,6 @@ var ReactPlacesStreetInput = function (_Component) {
           inputAutocomplete = _state.inputAutocomplete;
 
       var inputProps = this.getInputProps();
-      // if(inputAutocomplete && value != undefined) {
-      //   inputProps.value = value;
-      // }
       return _react2.default.createElement(
         'div',
         {
@@ -390,7 +390,7 @@ var ReactPlacesStreetInput = function (_Component) {
           style: this.inlineStyleFor('root'),
           className: this.classNameFor('root') },
         _react2.default.createElement('input', _extends({}, inputProps, { autoComplete: inputAutocomplete ? 'on' : 'off' })),
-        autocompleteItems.length > 0 && _react2.default.createElement(
+        !inputAutocomplete && autocompleteItems.length > 0 && _react2.default.createElement(
           'div',
           {
             id: 'ReactPlacesStreetInput__autocomplete-container',
