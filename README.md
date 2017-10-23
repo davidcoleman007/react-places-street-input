@@ -109,7 +109,7 @@ export default SimpleForm
 * [`highlightFirstSuggestion`](#highlightFirstSuggestion)
 * [`googleLogo`](#googleLogo)
 * [`googleLogoType`](#googleLogoType)
-* [`enableAutoCompleteWhenNotFocused`](#enable-autocomplete-when-not-focused)
+* [`enableAutoCompleteWhenNotFocused`](#enableAutoCompleteWhenNotFocused)
 <a name="inputProps"></a>
 #### inputProps
 Type: `Object`,
@@ -432,7 +432,7 @@ geocodeByAddress('Los Angeles, CA')
   .catch(error => console.error(error))
 ```
 
-<a name="enable-autoomplete-when-not-focused"></a>
+<a name="enableAutoCompleteWhenNotFocused"></a>
 ### `enableAutoCompleteWhenNotFocused`
 
 when `true`, the component will have the dom property `autocomplete` set to `on`
