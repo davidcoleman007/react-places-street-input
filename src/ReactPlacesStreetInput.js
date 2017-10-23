@@ -88,8 +88,10 @@ class ReactPlacesStreetInput extends Component {
   }
 
   clearAutocomplete() {
+    const {onClearAutocomplete} = this.props;
     console.log('clearing autocomplete');
-    this.setState({ autocompleteItems: [] })
+    this.setState({ autocompleteItems: [] });
+    onClearAutocomplete && onClearAutocomplete();
   }
 
   selectAddress(address, placeId) {
