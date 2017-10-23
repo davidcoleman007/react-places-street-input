@@ -23,7 +23,7 @@ class ReactPlacesStreetInput extends Component {
 
     this.state = { 
       autocompleteItems: [],
-      inputAutocomplete: true
+      inputAutocomplete: false
     }
 
     this.autocompleteCallback = this.autocompleteCallback.bind(this)
@@ -302,16 +302,13 @@ class ReactPlacesStreetInput extends Component {
     const { classNames, styles } = this.props
     const { autocompleteItems, inputAutocomplete } = this.state
     const inputProps = this.getInputProps()
-    // if(inputAutocomplete && value != undefined) {
-    //   inputProps.value = value;
-    // }
     return (
       <div
         id="ReactPlacesStreetInput__root"
         style={this.inlineStyleFor('root')}
         className={this.classNameFor('root')}>
         <input {...inputProps} autoComplete={inputAutocomplete?'on':'off'} />
-        {autocompleteItems.length > 0 && (
+        {!inputAutocomplete && autocompleteItems.length > 0 && (
           <div
             id="ReactPlacesStreetInput__autocomplete-container"
             style={this.inlineStyleFor('autocompleteContainer')}
