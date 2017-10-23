@@ -433,7 +433,7 @@ geocodeByAddress('Los Angeles, CA')
 ```
 
 <a name="enable-autoomplete-when-not-focused"></a>
-### `enableAutoCompleteWhenNotFocused` API
+### `enableAutoCompleteWhenNotFocused`
 
 when `true`, the component will have the dom property `autocomplete` set to `on`
 when not focused, and `off` then focused.  This allows Google Chrome auto-fill to
