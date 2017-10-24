@@ -54,7 +54,7 @@ var ReactPlacesStreetInput = function (_Component) {
 
     _this.state = {
       autocompleteItems: [],
-      inputAutocomplete: false
+      inputAutocomplete: props.enableAutoCompleteWhenNotFocused ? true : false
     };
 
     _this.autocompleteCallback = _this.autocompleteCallback.bind(_this);

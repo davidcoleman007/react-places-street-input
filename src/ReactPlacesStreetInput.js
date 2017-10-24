@@ -23,7 +23,7 @@ class ReactPlacesStreetInput extends Component {
 
     this.state = { 
       autocompleteItems: [],
-      inputAutocomplete: false
+      inputAutocomplete: props.enableAutoCompleteWhenNotFocused?true:false
     }
 
     this.autocompleteCallback = this.autocompleteCallback.bind(this)

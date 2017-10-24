@@ -134,7 +134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    _this.state = {
 	      autocompleteItems: [],
-	      inputAutocomplete: false
+	      inputAutocomplete: props.enableAutoCompleteWhenNotFocused ? true : false
 	    };
 	
 	    _this.autocompleteCallback = _this.autocompleteCallback.bind(_this);
@@ -5748,7 +5748,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        // TODO: Remove callback support in the next major version.
 	        if (callback) {
-	          console.warn('Deprecated: Passing a callback to geocodeByAddress is deprecated. Please see "https://github.com/kenny-hibino/react-places-autocomplete#geocodebyaddress-api"');
+	          console.warn('Deprecated: Passing a callback to geocodeByAddress is deprecated. Please see "https://github.com/davidcoleman007/react-places-street-input#geocodebyaddress-api"');
 	          callback({ status: status }, null, results);
 	          return;
 	        }
@@ -5762,7 +5762,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          lat: results[0].geometry.location.lat(),
 	          lng: results[0].geometry.location.lng()
 	        };
-	        console.warn('Deprecated: Passing a callback to geocodeByAddress is deprecated. Please see "https://github.com/kenny-hibino/react-places-autocomplete#geocodebyaddress-api"');
+	        console.warn('Deprecated: Passing a callback to geocodeByAddress is deprecated. Please see "https://github.com/davidcoleman007/react-places-street-input#geocodebyaddress-api"');
 	        callback(null, latLng, results);
 	      }
 	
@@ -5795,7 +5795,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        // TODO: Remove callback support in the next major version.
 	        if (callback) {
-	          console.warn('Deprecated: Passing a callback to geocodeByAddress is deprecated. Please see "https://github.com/kenny-hibino/react-places-autocomplete#geocodebyplaceid-api"');
+	          console.warn('Deprecated: Passing a callback to geocodeByAddress is deprecated. Please see "https://github.com/davidcoleman007/react-places-street-input#geocodebyplaceid-api"');
 	          callback({ status: status }, null, results);
 	          return;
 	        }
@@ -5809,7 +5809,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          lat: results[0].geometry.location.lat(),
 	          lng: results[0].geometry.location.lng()
 	        };
-	        console.warn('Deprecated: Passing a callback to geocodeByPlaceId is deprecated. Please see "https://github.com/kenny-hibino/react-places-autocomplete#geocodebyplaceid-api"');
+	        console.warn('Deprecated: Passing a callback to geocodeByPlaceId is deprecated. Please see "https://github.com/davidcoleman007/react-places-street-input#geocodebyplaceid-api"');
 	        callback(null, latLng, results);
 	      }
 	
