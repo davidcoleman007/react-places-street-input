@@ -134,7 +134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    _this.state = {
 	      autocompleteItems: [],
-	      inputAutocomplete: props.enableAutoCompleteWhenNotFocused ? true : false
+	      inputAutofill: props.enableAutofillWhenNotFocused ? true : false
 	    };
 	
 	    _this.autocompleteCallback = _this.autocompleteCallback.bind(_this);
@@ -168,9 +168,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        return;
 	      }
-	      console.log('autocompleteCallback', this.state.inputAutocomplete);
-	      if (this.state.inputAutocomplete) {
-	        console.log('inputAutocomplete is on', this.state.inputAutocomplete);
+	      if (this.state.inputAutofill) {
 	        this.clearAutocomplete();
 	        return;
 	      }
@@ -341,36 +339,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'handleInputChange',
 	    value: function handleInputChange(event) {
-	      var inputAutocomplete = this.state.inputAutocomplete;
+	      var inputAutofill = this.state.inputAutofill;
 	
-	      console.log('inputAutocomplete = ', inputAutocomplete, this.props.inputProps);
-	      if (!inputAutocomplete) {
-	        console.log('this is a focused event');
+	      if (!inputAutofill) {
 	        this.props.inputProps.onChange(event.target.value);
 	      } else {
-	        console.log('will fire onChangeUnFocused');
 	        if (this.props.onChangeUnFocused) {
 	          this.props.onChangeUnFocused(event.target.value);
 	        }
 	      }
-	      if (!event.target.value || inputAutocomplete) {
-	        console.log('clearing autocomplete');
+	      if (!event.target.value || inputAutofill) {
 	        this.clearAutocomplete();
 	        return;
 	      }
-	      if (!inputAutocomplete) {
+	      if (!inputAutofill) {
 	        this.debouncedFetchPredictions();
 	      }
 	    }
 	  }, {
 	    key: 'handleInputOnBlur',
 	    value: function handleInputOnBlur(event) {
-	      console.log('handleInputOnBlur');
 	      this.clearAutocomplete();
-	      console.log('this.props.enableAutoCompleteWhenNotFocused', this.props.enableAutoCompleteWhenNotFocused, this.props);
-	      if (this.props.enableAutoCompleteWhenNotFocused) {
+	      if (this.props.enableAutofillWhenNotFocused) {
 	        this.setState(_extends({}, this.state, {
-	          inputAutocomplete: true
+	          inputAutofill: true
 	        }));
 	      }
 	      if (this.props.inputProps.onBlur) {
@@ -380,9 +372,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'handleInputOnFocus',
 	    value: function handleInputOnFocus(event) {
-	      console.log('focus');
 	      this.setState(_extends({}, this.state, {
-	        inputAutocomplete: false
+	        inputAutofill: false
 	      }));
 	      if (this.props.inputProps.onFocus) {
 	        this.props.inputProps.onFocus(event);
@@ -456,21 +447,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _this3 = this;
 	
 	      var _props2 = this.props,
+	          autocomplete = _props2.autocomplete,
 	          classNames = _props2.classNames,
 	          styles = _props2.styles;
 	      var _state = this.state,
 	          autocompleteItems = _state.autocompleteItems,
-	          inputAutocomplete = _state.inputAutocomplete;
+	          inputAutofill = _state.inputAutofill;
 	
 	      var inputProps = this.getInputProps();
+	      console.log(inputAutofill);
+	      if (!inputAutofill) {
+	        inputProps.name = '';
+	      }
+	      var inputAutoComplete = !autocomplete ? 'off' : autocomplete;
 	      return _react2.default.createElement(
 	        'div',
 	        {
 	          id: 'ReactPlacesStreetInput__root',
 	          style: this.inlineStyleFor('root'),
 	          className: this.classNameFor('root') },
-	        _react2.default.createElement('input', _extends({}, inputProps, { autoComplete: inputAutocomplete ? 'on' : 'off' })),
-	        !inputAutocomplete && autocompleteItems.length > 0 && _react2.default.createElement(
+	        _react2.default.createElement('input', _extends({}, inputProps, { autoComplete: inputAutoComplete })),
+	        !inputAutofill && autocompleteItems.length > 0 && _react2.default.createElement(
 	          'div',
 	          {
 	            id: 'ReactPlacesStreetInput__autocomplete-container',
@@ -582,7 +579,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  highlightFirstSuggestion: false,
 	  googleLogo: true,
 	  googleLogoType: 'default',
-	  enableAutoCompleteWhenNotFocused: false
+	  enableAutofillWhenNotFocused: false
 	};
 	
 	exports.default = ReactPlacesStreetInput;

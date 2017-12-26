@@ -109,7 +109,7 @@ export default SimpleForm
 * [`highlightFirstSuggestion`](#highlightFirstSuggestion)
 * [`googleLogo`](#googleLogo)
 * [`googleLogoType`](#googleLogoType)
-* [`enableAutoCompleteWhenNotFocused`](#enableAutoCompleteWhenNotFocused)
+* [`enableAutofillWhenNotFocused`](#enableAutofillWhenNotFocused)
 <a name="inputProps"></a>
 #### inputProps
 Type: `Object`,
@@ -432,11 +432,13 @@ geocodeByAddress('Los Angeles, CA')
   .catch(error => console.error(error))
 ```
 
-<a name="enableAutoCompleteWhenNotFocused"></a>
-### `enableAutoCompleteWhenNotFocused`
+<a name="enableAutofillWhenNotFocused"></a>
+### `enableAutofillWhenNotFocused`
 
-when `true`, the component will have the dom property `autocomplete` set to `on`
-when not focused, and `off` then focused.  This allows Google Chrome auto-fill to
+when `true`, the component will have the dom property `autocomplete` set to `props.autocomplete`
+when not focused, and `off` when focused.  Additionally, the `name` attribute of the `<input/>`
+will be set to `''` when focused.  This prevents Google Chrome autofill from
+interfering with the drop down behavior while still allowing Google Chrome auto-fill to
 fill this component with a predefined value relevant to the value of the 
 `inputProp.name` property, such as `name="street"` in a use case where this
 places search component is used as an enhanced street input in an address form.

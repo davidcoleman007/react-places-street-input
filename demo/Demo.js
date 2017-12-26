@@ -100,8 +100,8 @@ class Demo extends React.Component {
       onFocus: () => { console.log('Focused!'); },
       autoFocus: true,
       placeholder: "Search Places",
-      name: 'Demo__input',
-      id: "my-input-id",
+      name: 'ship-address',
+      id: "frmAddressS",
     }
 
     return (
@@ -116,18 +116,44 @@ class Demo extends React.Component {
           </a>
         </div>
         <div className='container'>
-          <ReactPlacesStreetInput
-            onSelect={this.handleSelect}
-            autocompleteItem={AutocompleteItem}
-            onEnterKeyDown={this.handleSelect}
-            classNames={cssClasses}
-            inputProps={inputProps}
-            enableAutoCompleteWhenNotFocused
-          />
-          {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
-          {!this.state.loading && this.state.geocodeResults ?
-            <div className='geocoding-results'>{this.state.geocodeResults}</div> :
-          null}
+          <form>
+            <legend>Contact Info</legend>
+            <label for="frmNameA">Name</label>
+            <input name="name" id="frmNameA" placeholder="Full name" required autocomplete="name"/>
+            <label for="frmEmailA">Email</label>
+            <input type="email" name="email" id="frmEmailA" placeholder="name@example.com" required autocomplete="email"/>
+            <label for="frmEmailC">Confirm Email</label>
+            <input type="email" name="emailC" id="frmEmailC" placeholder="name@example.com" required autocomplete="email"/>
+            <label for="frmPhoneNumA">Phone</label>
+            <input type="tel" name="phone" id="frmPhoneNumA" placeholder="+1-650-450-1212" required autocomplete="tel"/>
+
+            Enter Address:
+            <fieldset>
+              <legend>Shipping</legend>
+              <label for="frmAddressS">Address</label>
+              <ReactPlacesStreetInput
+                onSelect={this.handleSelect}
+                autocompleteItem={AutocompleteItem}
+                onEnterKeyDown={this.handleSelect}
+                classNames={cssClasses}
+                inputProps={inputProps}
+                enableAutofillWhenNotFocused
+              />
+              <label for="frmCityS">City</label>
+              <input name="ship-city" required="" id="frmCityS" placeholder="New York" autocomplete="shipping address-level2"/>
+              <label for="frmStateS">State</label>
+              <input name="ship-state" required="" id="frmStateS" placeholder="NY" autocomplete="shipping address-level1"/>
+              <label for="frmZipS">Zip</label>
+              <input name="ship-zip" required="" id="frmZipS" placeholder="10011" autocomplete="shipping postal-code"/>
+              <label for="frmCountryS">Country</label>
+              <input name="ship-country" required="" id="frmCountryS" placeholder="USA" autocomplete="shipping country"/>
+
+            </fieldset>
+            {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
+            {!this.state.loading && this.state.geocodeResults ?
+              <div className='geocoding-results'>{this.state.geocodeResults}</div> :
+            null}
+          </form>
         </div>
       </div>
     )

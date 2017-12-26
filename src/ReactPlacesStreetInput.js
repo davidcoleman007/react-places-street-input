@@ -23,7 +23,7 @@ class ReactPlacesStreetInput extends Component {
 
     this.state = { 
       autocompleteItems: [],
-      inputAutocomplete: props.enableAutoCompleteWhenNotFocused?true:false
+      inputAutofill: props.enableAutofillWhenNotFocused?true:false
     }
 
     this.autocompleteCallback = this.autocompleteCallback.bind(this)
@@ -51,9 +51,7 @@ class ReactPlacesStreetInput extends Component {
       if (this.props.clearItemsOnError) { this.clearAutocomplete() }
       return
     }
-    console.log('autocompleteCallback',this.state.inputAutocomplete)
-    if(this.state.inputAutocomplete) {
-      console.log('inputAutocomplete is on', this.state.inputAutocomplete);
+    if(this.state.inputAutofill) {
       this.clearAutocomplete()
       return;
     }
@@ -201,35 +199,29 @@ class ReactPlacesStreetInput extends Component {
   }
 
   handleInputChange(event) {
-    const {inputAutocomplete} = this.state;
-    console.log('inputAutocomplete = ', inputAutocomplete, this.props.inputProps)
-    if(!inputAutocomplete) {
-      console.log('this is a focused event')
+    const {inputAutofill} = this.state;
+    if(!inputAutofill) {
       this.props.inputProps.onChange(event.target.value)
     } else {
-      console.log('will fire onChangeUnFocused')
       if(this.props.onChangeUnFocused) {
         this.props.onChangeUnFocused(event.target.value)
       }
     }
-    if (!event.target.value || inputAutocomplete) {
-      console.log('clearing autocomplete');
+    if (!event.target.value || inputAutofill) {
       this.clearAutocomplete()
       return
     }
-    if(!inputAutocomplete) {
+    if(!inputAutofill) {
       this.debouncedFetchPredictions()
     }
   }
 
   handleInputOnBlur(event) {
-    console.log('handleInputOnBlur');
     this.clearAutocomplete()
-    console.log('this.props.enableAutoCompleteWhenNotFocused', this.props.enableAutoCompleteWhenNotFocused, this.props)
-    if(this.props.enableAutoCompleteWhenNotFocused) {
+    if(this.props.enableAutofillWhenNotFocused) {
       this.setState({
         ...this.state,
-        inputAutocomplete: true
+        inputAutofill: true
       })
     }
     if (this.props.inputProps.onBlur) {
@@ -238,10 +230,9 @@ class ReactPlacesStreetInput extends Component {
   }
   
   handleInputOnFocus(event) {
-    console.log('focus');
     this.setState({
       ...this.state,
-      inputAutocomplete: false
+      inputAutofill: false
     })
     if (this.props.inputProps.onFocus) {
       this.props.inputProps.onFocus(event)
@@ -299,16 +290,21 @@ class ReactPlacesStreetInput extends Component {
   }
 
   render() {
-    const { classNames, styles } = this.props
-    const { autocompleteItems, inputAutocomplete } = this.state
+    const { autocomplete, classNames, styles } = this.props
+    const { autocompleteItems, inputAutofill } = this.state
     const inputProps = this.getInputProps()
+    console.log(inputAutofill);
+    if(!inputAutofill) {
+      inputProps.name = ''
+    }
+    let inputAutoComplete = (!autocomplete)?'off':autocomplete
     return (
       <div
         id="ReactPlacesStreetInput__root"
         style={this.inlineStyleFor('root')}
         className={this.classNameFor('root')}>
-        <input {...inputProps} autoComplete={inputAutocomplete?'on':'off'} />
-        {!inputAutocomplete && autocompleteItems.length > 0 && (
+        <input {...inputProps} autoComplete={inputAutoComplete} />
+        {!inputAutofill && autocompleteItems.length > 0 && (
           <div
             id="ReactPlacesStreetInput__autocomplete-container"
             style={this.inlineStyleFor('autocompleteContainer')}
@@ -405,7 +401,7 @@ ReactPlacesStreetInput.defaultProps = {
   highlightFirstSuggestion: false,
   googleLogo: true,
   googleLogoType: 'default',
-  enableAutoCompleteWhenNotFocused: false
+  enableAutofillWhenNotFocused: false
 }
 
 export default ReactPlacesStreetInput
