@@ -98,9 +98,8 @@ class Demo extends React.Component {
       onChange: this.handleChange,
       onBlur: () => { console.log('Blur event!'); },
       onFocus: () => { console.log('Focused!'); },
-      autoFocus: true,
-      placeholder: "Search Places",
-      name: 'ship-address',
+      placeholder: "street",
+      name: 'ship-street',
       id: "frmAddressS",
     }
 
@@ -132,13 +131,15 @@ class Demo extends React.Component {
               <legend>Shipping</legend>
               <label for="frmAddressS">Address</label>
               <ReactPlacesStreetInput
+                autocomplete="shipping street-address"
                 onSelect={this.handleSelect}
                 autocompleteItem={AutocompleteItem}
                 onEnterKeyDown={this.handleSelect}
                 classNames={cssClasses}
                 inputProps={inputProps}
                 enableAutofillWhenNotFocused
-              />
+                />
+              <input name="ship-city" required="" id="frmCityS" placeholder="New York" autocomplete="shipping address-level2"/>
               <label for="frmCityS">City</label>
               <input name="ship-city" required="" id="frmCityS" placeholder="New York" autocomplete="shipping address-level2"/>
               <label for="frmStateS">State</label>
