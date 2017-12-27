@@ -372,6 +372,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'handleInputOnFocus',
 	    value: function handleInputOnFocus(event) {
+	      event.preventDefault();
 	      this.setState(_extends({}, this.state, {
 	        inputAutofill: false
 	      }));
@@ -457,9 +458,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var inputProps = this.getInputProps();
 	      console.log(inputAutofill);
 	      if (!inputAutofill) {
-	        inputProps.name = '';
+	        inputProps.name = ((Math.random() ^ 2 * 100000) >> 0).toString(16);
 	      }
-	      var inputAutoComplete = !autocomplete || !inputAutofill ? 'off' : autocomplete;
+	      var inputAutoComplete = !autocomplete || !inputAutofill ? ((Math.random() ^ 2 * 100000) >> 0).toString(16) : autocomplete;
 	      return _react2.default.createElement(
 	        'div',
 	        {
