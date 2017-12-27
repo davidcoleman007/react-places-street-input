@@ -230,6 +230,7 @@ class ReactPlacesStreetInput extends Component {
   }
   
   handleInputOnFocus(event) {
+    event.preventDefault();
     this.setState({
       ...this.state,
       inputAutofill: false
@@ -295,9 +296,9 @@ class ReactPlacesStreetInput extends Component {
     const inputProps = this.getInputProps()
     console.log(inputAutofill);
     if(!inputAutofill) {
-      inputProps.name = ''
+      inputProps.name = ((Math.random()^2*100000)>>0).toString(16);
     }
-    let inputAutoComplete = (!autocomplete || !inputAutofill)?'off':autocomplete
+    let inputAutoComplete = (!autocomplete || !inputAutofill)?((Math.random()^2*100000)>>0).toString(16):autocomplete
     return (
       <div
         id="ReactPlacesStreetInput__root"
