@@ -459,7 +459,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!inputAutofill) {
 	        inputProps.name = '';
 	      }
-	      var inputAutoComplete = !autocomplete ? 'off' : autocomplete;
+	      var inputAutoComplete = !autocomplete || !inputAutofill ? 'off' : autocomplete;
 	      return _react2.default.createElement(
 	        'div',
 	        {

@@ -297,7 +297,7 @@ class ReactPlacesStreetInput extends Component {
     if(!inputAutofill) {
       inputProps.name = ''
     }
-    let inputAutoComplete = (!autocomplete)?'off':autocomplete
+    let inputAutoComplete = (!autocomplete || !inputAutofill)?'off':autocomplete
     return (
       <div
         id="ReactPlacesStreetInput__root"
